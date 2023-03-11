@@ -1,0 +1,32 @@
+###### 1 ######
+
+    "name": "Vasco",
+    "email": "Vasco@Dagama.com",
+    "password": "Gigante",
+    "confirmpassword": "Gigante"
+    "_id": "6405e0b6535bcaf1235b8849",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDVlMGI2NTM1YmNhZjEyMzViODg0OSIsImlhdCI6MTY3ODEwNjgwNiwiZXhwIjoxNjc4NzExNjA2fQ.Jhl6SzAbQXrBQp4_kIIyNtR2xMdivKS6CoO2LHEERkM"
+
+###### 2 ######
+
+    "name": "Davi",
+    "email": "Davi@Santos.com",
+    "password": "SilvaSantos",
+    "confirmpassword": "SilvaSantos"
+    "_id": "6405e2352540973bedfd48d1",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDVlMjM1MjU0MDk3M2JlZGZkNDhkMSIsImlhdCI6MTY3ODEwNzE4OSwiZXhwIjoxNjc4NzExOTg5fQ.WiYvGRAve619SgfyxYuHNgXcd1GQekyl-EJ0P9xRKAE"
+
+###### 3 ######
+
+    "name": "Doly",
+    "email": "Doly@Santos.com",
+    "password": "DolyTheDog",
+    "confirmpassword": "DolyTheDog"
+    "_id": "6405e2982540973bedfd48d4",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDVlMjk4MjU0MDk3M2JlZGZkNDhkNCIsImlhdCI6MTY3ODEwNzI4OCwiZXhwIjoxNjc4NzEyMDg4fQ.AL_Ts4xNQxL0iOtVeLGDuZIdLJzvicqV-qT55a9aaSk"
+
+###### 4 ######
+    name
+    "name" : "ContaTeste"
+    "email" : "CTeste@teste.com"
+    "password" : "testando"
