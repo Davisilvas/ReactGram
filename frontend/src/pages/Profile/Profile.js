@@ -31,14 +31,14 @@ const Profile = () => {
         message: messagePhoto, 
         error: errorPhoto
     } = useSelector((state) => state.photo)
-
-    //states
-    const [title, setTitle] = useState("")
-    const [image, setImage] = useState("")
     
     // photo - New frorm and edit form refs
     const newPhotoForm = useRef()
     const editPhotoForm = useRef()
+
+    //states
+    const [title, setTitle] = useState("")
+    const [image, setImage] = useState("")
 
 
     // Load user data
@@ -103,7 +103,7 @@ const Profile = () => {
                     <h3>Compartilhe algum momento seu:</h3>
                     <form onSubmit={submitHandle}>
                         <label>
-                            <span>Título para a foto</span>
+                            <span>Título para a foto:</span>
                             <input 
                                 type="text" 
                                 placeholder='Insira um título'
