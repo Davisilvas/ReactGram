@@ -17,7 +17,13 @@ import { useParams } from "react-router-dom";
 
 // redux
 import { getUserDetails } from "../../slices/userSlice"
-import { publishPhoto, resetMessage, getUserPhotos } from '../../slices/photoSlice';
+import { 
+        publishPhoto, 
+        resetMessage, 
+        getUserPhotos, 
+        deletePhoto, 
+        updatePhoto, 
+    } from '../../slices/photoSlice';
 
 const Profile = () => {
     const { id }  = useParams()
@@ -40,6 +46,10 @@ const Profile = () => {
     const [title, setTitle] = useState("")
     const [image, setImage] = useState("")
 
+    const [editID, setEditId] = useState("")
+    const [editImage, setEditImage] = useState("")
+    const [editTitle, setEditTitle] = useState("")
+
 
     // Load user data
     useEffect(() => {
@@ -51,7 +61,56 @@ const Profile = () => {
         return <p>Carregando...</p>
     }
 
+    
     //functions
+    const resetComponentMessage = () => {
+        setTimeout(() => {
+            dispatch(resetMessage());
+        }, 2000); 
+    }
+
+    // show or hide forms
+    const hideOrShowForms = () => {
+        newPhotoForm.current.classList.toggle('hide')
+        editPhotoForm.current.classList.toggle('hide')
+    }
+    
+    // Del a photo
+    const handleDelete = (id) => {
+        dispatch(deletePhoto(id))
+        resetComponentMessage()
+    }
+
+    //Update a photo
+    const handleUpdate = (e) => {
+        e.preventDefault()
+
+        const photoData = {
+            title: editTitle,
+            id: editID
+        }
+
+        dispatch(updatePhoto(photoData))
+        resetComponentMessage()
+    }
+
+    // quiting edit form
+    const handleCancelEdit = () => {
+        hideOrShowForms()
+    }
+
+    // open edit form
+    const handleEdit = (photo) => {
+        if(editPhotoForm.current.classList.contains("hide")){
+            hideOrShowForms()
+        }
+
+        setEditId(photo._id)
+        setEditTitle(photo.title)
+        setEditImage(photo.image)
+
+    }
+
     const handleFile = (e) => {
         const image = e.target.files[0]
 
@@ -77,11 +136,8 @@ const Profile = () => {
 
         dispatch(publishPhoto(formData))
 
-        setTitle("")
-
-        setTimeout(() => {
-            dispatch(resetMessage());
-        }, 2000);       
+        setTitle("")      
+        resetComponentMessage()
     }
 
   return (
@@ -124,6 +180,33 @@ const Profile = () => {
                         }
                     </form>
                 </div>
+                <div className="edit-photo hide" ref={editPhotoForm}>
+                    <p>Editando</p>
+                    {editImage && (
+                        <img 
+                            src={`${uploads}/photos/${editImage}`} 
+                            alt={editTitle}
+                        />
+                    )}
+                    <form onSubmit={handleUpdate}>
+                        <input 
+                            type="text" 
+                            placeholder='Insira um novo título'
+                            onChange={(e)=>setEditTitle(e.target.value)}
+                            value={editTitle || ''}
+                        />
+                        <input 
+                            type="submit" 
+                            value="Atualizar" 
+                        />
+                        <button 
+                            className='cancel-btn'
+                            onClick={handleCancelEdit}
+                        >
+                            Cancelar edição
+                        </button>
+                    </form>
+                </div>
                 {errorPhoto && <Message msg={errorPhoto} type="error"/>}
                 {messagePhoto && <Message msg={messagePhoto} type="success"/>}
             </>
@@ -135,7 +218,7 @@ const Profile = () => {
                     <div className="photo" key={photo._id}>
                         {photo.image && (
                             <img 
-                                src={`${uploads}/photos/${photo.image  }`}
+                                src={`${uploads}/photos/${photo.image}`}
                                 alt={photo.title}
                             />
                         )}
@@ -144,8 +227,12 @@ const Profile = () => {
                                 <Link to={`/photos/${photo._id}`}>
                                     <BsFillEyeFill />
                                 </Link>
-                                <BsPencilFill />
-                                <BsXLg />
+                                <BsPencilFill 
+                                    onClick={()=> handleEdit(photo)}
+                                />
+                                <BsXLg 
+                                    onClick={() => handleDelete(photo._id)}
+                                />
                             </div>
                         ) : (
                             <Link className="btn" to={`/photos/${photo._id}`}>Ver</Link>
